@@ -1,0 +1,255 @@
+���ڱȽ��ļ� xjtuthesis.cls �� XJTUTHESIS2.CLS
+***** xjtuthesis.cls
+% https://code.google.com/p/xjtuthesis/
+%
+% It is strongly recommended that you read documentations located at
+***** XJTUTHESIS2.CLS
+% https://code.google.com/p/xjtuthesis/
+% 
+% It is strongly recommended that you read documentations located at
+*****
+
+***** xjtuthesis.cls
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Weisi Dai.
+***** XJTUTHESIS2.CLS
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Weisi Dai.
+*****
+
+***** xjtuthesis.cls
+% Math & format packages
+% \RequirePackage{showframe}
+\RequirePackage[fleqn]{amsmath}
+***** XJTUTHESIS2.CLS
+% Math & format packages
+\RequirePackage[fleqn]{amsmath}
+*****
+
+***** xjtuthesis.cls
+% CJK character support
+\RequirePackage[no-math]{fontspec}
+\RequirePackage{xltxtra,xunicode}
+\RequirePackage[slantfont,boldfont,CJKnumber]{xeCJK}
+***** XJTUTHESIS2.CLS
+% CJK character support
+\RequirePackage{fontspec,xltxtra,xunicode}
+\RequirePackage[slantfont,boldfont,CJKnumber]{xeCJK}
+*****
+
+***** xjtuthesis.cls
+% l10n here
+\renewcommand{\tablename}{表}
+\renewcommand{\figurename}{图}
+\renewcommand{\bibname}{\vskip -0.5em 参考文献}
+***** XJTUTHESIS2.CLS
+% l10n here
+\renewcommand{\tablename}{表} 
+\renewcommand{\figurename}{图} 
+\renewcommand{\bibname}{\vskip -0.5em 参考文献}
+*****
+
+***** xjtuthesis.cls
+            plainpages=false,
+            % pdfpagelabels, % comment this because warning
+            pdfborder=0 0 0,
+***** XJTUTHESIS2.CLS
+            plainpages=false,
+            pdfpagelabels,
+            pdfborder=0 0 0,
+*****
+
+***** xjtuthesis.cls
+\renewcommand\normalsize{%
+   \@setfontsize\normalsize{12bp}{20bp}%
+  \abovedisplayskip=10bp \@plus 2bp \@minus 2bp
+***** XJTUTHESIS2.CLS
+\renewcommand\normalsize{%
+  \@setfontsize\normalsize{12bp}{20bp}
+  \abovedisplayskip=10bp \@plus 2bp \@minus 2bp
+*****
+
+***** xjtuthesis.cls
+\renewcommand\thefootnote{\protect\circled{\arabic{footnote}}}
+\setlength{\footnotesep}{\baselineskip}
+\renewcommand\@makefntext[1]{
+    \setstretch{1.2}%
+    \noindent\@thefnmark #1
+}
+***** XJTUTHESIS2.CLS
+\renewcommand\thefootnote{\protect\circled{\arabic{footnote}}}
+\renewcommand\@makefntext[1]{
+    \noindent\makebox[0pt][r]{\@thefnmark}#1
+}
+*****
+
+***** xjtuthesis.cls
+\topmargin=-1in % 消除页眉-边界距离初始�
+\headheight=5.5mm % 该设定使得效果与官方doc模板相似
+\textheight=242mm % 297-30-25
+***** XJTUTHESIS2.CLS
+\topmargin=-1in % 消除页眉-边界距离初始�
+\headheight=8mm 
+\headsep=2mm
+\textheight=242mm % 297-30-25
+*****
+
+***** xjtuthesis.cls
+\footskip=7.5mm
+\setlength\voffset{2cm} % 规范：页眉距边界2.0cm, one inch + \voffset + \topmargin = 2cm.
+% 规范：上装订线边�?cm，即上边距到正文3cm�
+% 需�?1 inch + \voffset + \topmargin + \headheight + \headsep = 3.0cm
+\headsep= 4.5mm
+\pagenumbering{Roman}
+***** XJTUTHESIS2.CLS
+\footskip=7.5mm
+\setlength\voffset{2cm} % 规范：页眉距边界2.0cm
+\pagenumbering{Roman}
+*****
+
+***** xjtuthesis.cls
+            \vspace*{2.6pt}}
+
+    \fancypagestyle{plain}{%
+***** XJTUTHESIS2.CLS
+            \vspace*{2.6pt}}
+                
+    \fancypagestyle{plain}{%
+*****
+
+***** xjtuthesis.cls
+      \fancyhead[CE]{\wuhao \ifxjtu@bachelor
+                        西安交通大学本科毕业设计（论文�
+                        \fi}
+***** XJTUTHESIS2.CLS
+      \fancyhead[CE]{\wuhao \ifxjtu@bachelor
+                        西安交通大学本科毕业设�?论文)
+                        \fi}
+*****
+
+***** xjtuthesis.cls
+      \fancyfoot[OR,EL]{\xiaowu ~\thepage~}
+      \renewcommand{\headrulewidth}{\if@mainmatter 0.5pt\else 0pt \fi}
+      \renewcommand{\headrule}{\hrule \@height \headrulewidth \@width \headwidth \vskip .5pt
+      \hrule \@height \headrulewidth \@width \headwidth \vskip -\headrulewidth}
+***** XJTUTHESIS2.CLS
+      \fancyfoot[OR,EL]{\xiaowu ~\thepage~}
+      \renewcommand{\headrulewidth}{\if@mainmatter 0.5bp\else 0bp \fi}
+      \renewcommand{\headrule}{\hrule \@height \headrulewidth \@width \headwidth \vskip .4pt
+      \hrule \@height \headrulewidth \@width \headwidth \vskip -\headrulewidth}
+*****
+
+***** xjtuthesis.cls
+    \renewcommand\xjtucinfopage{
+        \chaptermark{摘\quad 要}
+        \noindent {\bf
+***** XJTUTHESIS2.CLS
+    \renewcommand\xjtucinfopage{
+        \chaptermark{摘要}
+        \noindent {\bf
+*****
+
+***** xjtuthesis.cls
+                \fancyhead[CO]{\wuhao \ifxjtu@bachelor
+                                西安交通大学本科毕业设计（论文�
+                                \fi}
+***** XJTUTHESIS2.CLS
+                \fancyhead[CO]{\wuhao \ifxjtu@bachelor
+                                西安交通大学本科毕业设�?论文)
+                                \fi}
+*****
+
+***** xjtuthesis.cls
+                \fancyfoot[ER,OL]{\small ~\thepage~}
+                \renewcommand{\headrulewidth}{\if@mainmatter 0.5pt\else 0pt \fi}
+                \renewcommand{\headrule}{\hrule \@height \headrulewidth \@width \headwidth \vskip .5pt
+                \hrule \@height \headrulewidth \@width \headwidth \vskip -\headrulewidth}
+***** XJTUTHESIS2.CLS
+                \fancyfoot[ER,OL]{\small ~\thepage~}
+                \renewcommand{\headrulewidth}{\if@mainmatter 0.5bp\else 0bp \fi}
+                \renewcommand{\headrule}{\hrule \@height \headrulewidth \@width \headwidth \vskip .4pt
+                \hrule \@height \headrulewidth \@width \headwidth \vskip -\headrulewidth}
+*****
+
+***** xjtuthesis.cls
+    \pagestyle{plain}
+
+    \renewcommand\xjtucover{
+***** XJTUTHESIS2.CLS
+    \pagestyle{plain}
+    
+    \renewcommand\xjtucover{
+*****
+
+***** xjtuthesis.cls
+            \begin{spacing}{1.5}
+              \sihao
+              {\CJKfamily{hei}学位申请人：}  \underline{\makebox[6.2cm][c]{\xjtu@cauthor}}\\
+***** XJTUTHESIS2.CLS
+            \begin{spacing}{1.5}
+              \sihao 
+              {\CJKfamily{hei}学位申请人：}  \underline{\makebox[6.2cm][c]{\xjtu@cauthor}}\\
+*****
+
+***** xjtuthesis.cls
+
+            \vskip 6cm
+        \begin{spacing}{1.5}\sanhao
+***** XJTUTHESIS2.CLS
+
+            \vskip 6cm 
+        \begin{spacing}{1.5}\sanhao
+*****
+
+***** xjtuthesis.cls
+        \end{spacing}
+
+        \end{center}
+***** XJTUTHESIS2.CLS
+        \end{spacing}
+            
+        \end{center}
+*****
+
+***** xjtuthesis.cls
+        \xjtu@ckeywords
+
+        \noindent {\bf 论文类型}�
+***** XJTUTHESIS2.CLS
+        \xjtu@ckeywords
+        
+        \noindent {\bf 论文类型}�
+*****
+
+***** xjtuthesis.cls
+            \xjtu@ekeywords
+
+            \noindent {\bf TYPE OF \MakeUppercase{\thesis}} :
+***** XJTUTHESIS2.CLS
+            \xjtu@ekeywords
+        
+            \noindent {\bf TYPE OF \MakeUppercase{\thesis}} :
+*****
+
+***** xjtuthesis.cls
+��果，也不包含本人已用于其他学位申请的论文或成果�
+
+    本人如违反上述声明，愿意承担以下责任和后果：
+***** XJTUTHESIS2.CLS
+��果，也不包含本人已用于其他学位申请的论文或成果�
+    
+    本人如违反上述声明，愿意承担以下责任和后果：
+*****
+
+***** xjtuthesis.cls
+    \end{enumerate}
+
+    论文作者（签名）：\hskip 5cm 日期：\hskip 2cm 年\hskip 1cm 月\hskip 1cm�?\vskip 1cm
+***** XJTUTHESIS2.CLS
+    \end{enumerate}
+    
+    论文作者（签名）：\hskip 5cm 日期：\hskip 2cm 年\hskip 1cm 月\hskip 1cm�?\vskip 1cm
+*****
+
