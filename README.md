@@ -6,7 +6,7 @@ This is an XJTU thesis LaTeX template forked from [xjtuthesis](https://github.co
 I will add some .tex files that demonstrate the TeX file structure of this template, as well as a detailed usage instruction in the future.
 
 ####Changelog
-- 2016-05-27 and before
+###### 2016-05-27 and before
 1. Fixed bug, tuned position of header. Now it look the same as the official `.doc` template.
 2. Tuned header ruler appearance and position.
 3. Use `Computer Modern` font in math mode, which looks better.
