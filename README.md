@@ -11,7 +11,7 @@ In fact, `gbt7714-2005-xjtu.bst` in two repositories are the same since I did no
 
 ####Changelog
 ###### 2016-05-30
-1. Added support for writing pseudo code.
+1. Added support for writting pseudo code.
 
 ###### 2016-05-27 and before
 1. Fixed bug, tuned position of header. Now it look the same as the official `.doc` template.
