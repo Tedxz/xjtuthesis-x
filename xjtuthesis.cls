@@ -86,6 +86,8 @@
 \setenumerate[1]{1),fullwidth,itemindent=\parindent,listparindent=\parindent,itemsep=0.05\baselineskip,partopsep=0pt,parsep=0ex,topsep=0.1\baselineskip}
 \setenumerate[2]{\qquad(1),itemindent=\parindent,listparindent=\parindent,itemsep=0ex,partopsep=0pt,parsep=0ex,topsep=0\baselineskip}
 \RequirePackage{pdfpages}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
 
 % CJK character support
 \RequirePackage[no-math]{fontspec}
@@ -105,6 +107,7 @@
 \RequirePackage{titlesec,titletoc}
 
 % l10n here
+\renewcommand{\ALG@name}{算法}
 \renewcommand{\tablename}{表}
 \renewcommand{\figurename}{图}
 \renewcommand{\bibname}{\vskip -0.5em 参考文献}
@@ -384,6 +387,18 @@
     \oldtable[#1]
     \wuhao
 }
+
+% algorithm/pseudocode
+\renewcommand\thealgorithm{%
+    \ifnum \c@chapter >\z@ \thechapter-\fi \@arabic \c@algorithm%
+}
+\newcommand\fs@ruled@notop{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@ruled
+  %\def\@fs@pre{\hrule height.8pt depth0pt \kern2pt}% <----removed
+  \def\@fs@pre{\vskip0.5ex}%
+  \def\@fs@mid{\vskip1ex\kern2pt\hrule\kern2pt}%
+  \def\@fs@post{\kern2pt\hrule\relax}%
+  \let\@fs@iftopcapt\iftrue}
+\renewcommand\fst@algorithm{\fs@ruled@notop}
 
 \newcommand{\monthname}[1]{%
 \ifcase#1
