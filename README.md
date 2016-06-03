@@ -10,6 +10,9 @@ I will add some .tex files that demonstrate the TeX file structure of this templ
 In fact, `gbt7714-2005-xjtu.bst` in two repositories are the same since I did not modify it.
 
 ####Changelog
+###### 2016-06-03
+1. Adjusted default linespace in tables.
+
 ###### 2016-05-30
 1. Added support for writting pseudo code.
 

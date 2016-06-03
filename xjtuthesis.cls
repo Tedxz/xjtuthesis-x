@@ -386,6 +386,7 @@
 \renewcommand\table[1][]{
     \oldtable[#1]
     \wuhao
+    \renewcommand{\arraystretch}{1.5}
 }
 
 % algorithm/pseudocode
