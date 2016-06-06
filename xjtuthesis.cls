@@ -141,7 +141,7 @@
             anchorcolor=blue,
             citecolor=green,
             plainpages=false,
-            pdfpagelabels,
+            % pdfpagelabels, % comment this to reduce warning
             pdfborder=0 0 0,
         }
     \else
@@ -152,7 +152,7 @@
             breaklinks=true,
             colorlinks=false,
             plainpages=false,
-            % pdfpagelabels, % comment this because warning
+            % pdfpagelabels, % comment this to reduce warning
             pdfborder=0 0 0,
         }
     \fi
