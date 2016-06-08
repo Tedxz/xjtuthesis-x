@@ -387,6 +387,7 @@
 
 \let\oldtable=\table
 \renewcommand\table[1][]{
+    \vskip0.5\baselineskip
     \oldtable[#1]
     \wuhao
     \renewcommand{\arraystretch}{1.5}
@@ -403,25 +404,24 @@
   \def\@fs@post{\kern2pt\hrule height1.5pt\relax}%
   \let\@fs@iftopcapt\iftrue}
 \renewcommand\fst@algorithm{\fs@ruled@notop}
+
 % following codes are defining breakable pseudocode block.
 % this solution cannot prevent pagebreak before the ending hline.
 \newenvironment{breakablealgorithm}[1][\relex] %dismiss float placement specifier
   {% \begin{breakablealgorithm}
-   \begin{center}
+  {\par\baselineskip}%
      \refstepcounter{algorithm}% New algorithm
-    %  \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
      \renewcommand{\caption}[2][\relax]{% Make a new \caption
-       {{\wuhao \ALG@name~\thealgorithm\quad ##2}\par}%
+       {\centerline{\wuhao \ALG@name~\thealgorithm\quad ##2}\par}%
        \ifx\relax##1\relax % #1 is \relax
          \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
        \else % #1 is not \relax
          \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
        \fi
-       \kern2pt\hrule height 1.5pt\kern2pt
+       \vskip1ex\kern2pt\hrule height 1.5pt\kern2pt
      }
   }{% \end{breakablealgorithm}
-    \kern2pt\hrule height 1.5pt\relax% \@fs@post for \@fs@ruled
-   \end{center}
+    \kern2pt\hrule height 1.5pt\vskip0.5\baselineskip
   }
 % end algorithm
 
