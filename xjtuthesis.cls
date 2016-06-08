@@ -396,10 +396,31 @@
 \newcommand\fs@ruled@notop{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@ruled
   %\def\@fs@pre{\hrule height.8pt depth0pt \kern2pt}% <----removed
   \def\@fs@pre{\vskip0.5ex}%
-  \def\@fs@mid{\vskip1ex\kern2pt\hrule\kern2pt}%
-  \def\@fs@post{\kern2pt\hrule\relax}%
+  \def\@fs@mid{\vskip1ex\kern2pt\hrule height1.5pt\kern2pt}%
+  \def\@fs@post{\kern2pt\hrule height1.5pt\relax}%
   \let\@fs@iftopcapt\iftrue}
 \renewcommand\fst@algorithm{\fs@ruled@notop}
+% following codes are defining breakable pseudocode block.
+% this solution cannot prevent pagebreak before the ending hline.
+\newenvironment{breakablealgorithm}[1][\relex] %dismiss float placement specifier
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+    %  \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\ALG@name~\thealgorithm\quad ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule height 1.5pt\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+    \kern2pt\hrule height 1.5pt\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+% end algorithm
 
 \newcommand{\monthname}[1]{%
 \ifcase#1
@@ -493,10 +514,13 @@
 
 \ifxjtu@bachelor
 
+    % LaTeX and MS word calculate line space differently.
+    % Experiments shown that using \linespread{1.175} and \linespread{0.94}
+    % will give the same result of using 1.5 and 1.2 line spacing, respectively. 
     \ifxjtu@bigskip
-      \linespread{1.5} \selectfont
+      \linespread{1.175} \selectfont
     \else
-      \linespread{1.2} \selectfont
+      \linespread{0.94} \selectfont
     \fi
 
     \renewcommand\footnoterule{\vspace*{-3pt}% eggache!
