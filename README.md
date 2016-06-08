@@ -13,6 +13,7 @@ In fact, `gbt7714-2005-xjtu.bst` in two repositories are the same since I did no
 ###### 2016-06-08
 1. Use `breakablealgorithm` environment to allow page break in pseudo code block. `breakablealgorithm` and `algorithm` can work together in one document.
 2. Fixed wrong line spacing.
+3. Fixed wrong paragraph skip.
 
 ###### 2016-06-03
 1. Adjusted default linespace in tables.

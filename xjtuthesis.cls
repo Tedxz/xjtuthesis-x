@@ -346,6 +346,9 @@
 \newcommand\xjtutype{\xjtu@type}
 
 % Geometry specifications
+% raggedbottom 令latex倾向于在页低添加空白，而不是拉伸段间距或列表前后间距、公式图片前后间距。按照工作手册，要求段间不空行。
+% \parskip 0pt 也可以实现段间不空行，但是在无法填充页面时会导致列表前后、图片前后等位置被拉伸。
+\raggedbottom
 \topmargin=-1in % 消除页眉-边界距离初始值
 \headheight=5.5mm % 该设定使得效果与官方doc模板相似
 \textheight=242mm % 297-30-25
@@ -395,7 +398,7 @@
 }
 \newcommand\fs@ruled@notop{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@ruled
   %\def\@fs@pre{\hrule height.8pt depth0pt \kern2pt}% <----removed
-  \def\@fs@pre{\vskip0.5ex}%
+  \def\@fs@pre{\vskip0.5\baselineskip}%
   \def\@fs@mid{\vskip1ex\kern2pt\hrule height1.5pt\kern2pt}%
   \def\@fs@post{\kern2pt\hrule height1.5pt\relax}%
   \let\@fs@iftopcapt\iftrue}
@@ -408,7 +411,7 @@
      \refstepcounter{algorithm}% New algorithm
     %  \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
      \renewcommand{\caption}[2][\relax]{% Make a new \caption
-       {\ALG@name~\thealgorithm\quad ##2\par}%
+       {{\wuhao \ALG@name~\thealgorithm\quad ##2}\par}%
        \ifx\relax##1\relax % #1 is \relax
          \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
        \else % #1 is not \relax
@@ -516,7 +519,7 @@
 
     % LaTeX and MS word calculate line space differently.
     % Experiments shown that using \linespread{1.175} and \linespread{0.94}
-    % will give the same result of using 1.5 and 1.2 line spacing, respectively. 
+    % will give the same result of using 1.5 and 1.2 line spacing, respectively.
     \ifxjtu@bigskip
       \linespread{1.175} \selectfont
     \else
