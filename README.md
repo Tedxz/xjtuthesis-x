@@ -4,7 +4,7 @@ xjtuthesis-x
 [中文说明](README-CH.md)
 
 ####Introduction
-This is an XJTU thesis LaTeX template forked from `[xjtuthesis](https://github.com/Aetf/xjtuthesis)` v0.6.6, which was maintained by Weisi Dai et al. I've fixed several bugs and added some experimental features based on the original project.
+This is an XJTU thesis LaTeX template forked from [`xjtuthesis`](https://github.com/Aetf/xjtuthesis) v0.6.6, which was maintained by Weisi Dai et al. I've fixed several bugs and added some experimental features based on the original project.
 
 `xjtuthesis-x` also provides a [user guide](guide.pdf) of this project, including usage introduction of new features, as well as some advices about thesis writing according to my experience. Furthermore, you may also refer to the examples in `xjtuthesis` project to get started.
 
