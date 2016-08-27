@@ -1,0 +1,80 @@
+% !TEX root = ../guide.tex
+% algo_compare.tex
+%
+% Copyright 2016 Zheng Xie <xie.zheng777@gmail.com>
+% https://github.com/Tedxz/xjtuthesis-x
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Zheng Xie.
+%
+% xjtuthesis-x is a Derived Work of xjtuthesis. The original maintainer of
+% xjtuthesis is Weisi Dai (multiple1902 <multiple1902@gmail.com>),
+% who published the project on https://code.google.com/p/xjtuthesis/ (no
+% longer accessable). Currently, xjtuthesis is maintained by Aetf, and can
+% be accessed on https://github.com/Aetf/xjtuthesis.
+%
+% xjtuthesis-x includes bug fixes, new features and a user guide.
+% For detail, please refer to Readme.md.
+%
+% If you want to contribute to xjtuthesis-x or become the maintainer of
+% xjtuthesis-x, please feel free to contact me.
+
+\let\nf\nicefrac
+\let\tb\text
+\begin{threeparttable}
+
+\begin{tabular}{rcccccccl}
+\toprule
+                            & \textbf{K-means}         & \textbf{K-medians}\tnote{a}& \textbf{K-medoids}         & \textbf{BIRCH}         & \textbf{Linkage}         & \textbf{Mean-Shift}\tnote{b}& \textbf{AP}\tnote{c}   &  \\
+\midrule
+\textbf{\#clus.=3}          &                          &                            &                            &                        &                          &                             &                        &  \\
+$DBI$                       &$3.593                   $&$3.679                     $&$4.866                     $&$\bm{3.492}            $&$(0.426)                 $&$(0.430)                    $&$-                     $&  \\
+$DI$                        &$0.395                   $&$\bm{0.469}                $&$0.315                     $&$0.409                 $&$(2.192)                 $&$(2.160)                    $&$-                     $&  \\
+$SI$                        &$\bm{0.049}              $&$0.022                     $&$0.024                     $&$0.019                 $&$(0.405)                 $&$(0.399)                    $&$-                     $&  \\
+\nf{MIN}{MAX}               &\nf{15.2\%}{52.2\%}       &\nf{23.9\%}{39.4\%}         &\nf{14.7\%}{45.4\%}         &\nf{9.5\%}{68.8\%}      &\tb{\nf{0.3\%}{99.0\%}}   &\tb{\nf{0.3\%}{99.5\%}}      &$-                     $&  \\
+\textbf{\#clus.=4}          &                          &                            &                            &                        &                          &                             &                        &  \\
+$DBI                       $&$\bm{3.315}              $&$6.214                     $&$4.425                     $&$3.486                 $&$(0.436)                 $&$-                          $&$-                     $&  \\
+$DI                        $&$\bm{0.406}              $&$0.236                     $&$0.302                     $&$0.386                 $&$(2.167)                 $&$-                          $&$-                     $&  \\
+$SI                        $&$\bm{0.041}              $&$0.016                     $&$0.019                     $&$0.015                 $&$(0.393)                 $&$-                          $&$-                     $&  \\
+\nf{MIN}{MAX}               &\nf{11.5\%}{42.8\%}       &\nf{21.2\%}{27.8\%}         &\nf{7.6\%}{43.6\%}          &\nf{8.1\%}{60.6\%}      &\tb{\nf{0.3\%}{98.4\%}}   &$-                          $&$-                     $&  \\
+\textbf{\#clus.=5}          &                          &                            &                            &                        &                          &                             &                        &  \\
+$DBI                       $&$\bm{2.965}              $&$3.934                     $&$4.647                     $&$3.210                 $&$(0.441)                 $&$(0.459)                    $&$-                     $&  \\
+$DI                        $&$\bm{0.417}              $&$0.365                     $&$0.290                     $&$0.338                 $&$(2.151)                 $&$(1.962)                    $&$-                     $&  \\
+$SI                        $&$\bm{0.040}              $&$0.029                     $&$0.014                     $&$0.020                 $&$(0.388)                 $&$(0.354)                    $&$-                     $&  \\
+\nf{MIN}{MAX}               &\nf{2.6\%}{34.1\%}        &\nf{0.5\%}{31.5\%}          &\nf{6.8\%}{33.9\%}          &\nf{2.1\%}{60.6\%}      &\tb{\nf{0.3\%}{95.8\%}}   &\tb{\nf{0.3\%}{99.0\%}}      &$-                     $&  \\
+\textbf{\#clus.=6}          &                          &                            &                            &                        &                          &                             &                        &  \\
+$DBI                       $&$\bm{2.789}              $&$6.721                     $&$(3.951)                   $&$3.636                 $&$(0.459)                 $&$-                          $&$-                     $&  \\
+$DI                        $&$\bm{0.416}              $&$0.208                     $&$(0.290)                   $&$0.302                 $&$(1.968)                 $&$-                          $&$-                     $&  \\
+$SI                        $&$\bm{0.042}              $&$0.024                     $&$(0.019)                   $&$0.022                 $&$(0.356)                 $&$-                          $&$-                     $&  \\
+\nf{MIN}{MAX}               &\nf{5.2\%}{38.8\%}        &\nf{6.0\%}{27.3\%}          &\tb{\nf{0.2\%}{33.8\%}}     &\nf{2.1\%}{46.7\%}      &\tb{\nf{0.3\%}{94.2\%}}   &$-                          $&$-                     $&  \\
+\textbf{\#clus.=7}          &                          &                            &                            &                        &                          &                             &                        &  \\
+$DBI                       $&$\bm{2.424}              $&$5.384                     $&$(3.782)                   $&$3.410                 $&$(0.819)                 $&$(0.471)                    $&$-                     $&  \\
+$DI                        $&$\bm{0.436}              $&$0.244                     $&$(0.291)                   $&$0.301                 $&$(1.100)                 $&$(1.888)                    $&$-                     $&  \\
+$SI                        $&$\bm{0.049}              $&$0.008                     $&$(0.019)                   $&$0.023                 $&$(0.342)                 $&$(0.337)                    $&$-                     $&  \\
+\nf{MIN}{MAX}               &\nf{1.8\%}{36.7\%}        &\nf{3.9\%}{25.2\%}          &\tb{\nf{0.2\%}{33.6\%}}     &\nf{1.6\%}{45.1\%}      &\tb{\nf{0.3\%}{94.2\%}}   &\tb{\nf{0.3\%}{98.4\%}}      &$-                     $&  \\
+\textbf{\#clus.=11}         &                          &                            &                            &                        &                          &                             &                        &  \\
+$DBI                       $&$(2.077)                 $&$\bm{4.800}                $&$(3.128)                   $&$(2.568)               $&$(0.687)                 $&$-                          $&$(2.473)               $&  \\
+$DI                        $&$(0.401)                 $&$\bm{0.284}                $&$(0.275)                   $&$(0.334)               $&$(1.229)                 $&$-                          $&$(0.329)               $&  \\
+$SI                        $&$(0.049)                 $&$\bm{0.000}                $&$(0.018)                   $&$(0.018)               $&$(0.326)                 $&$-                          $&$(0.034)               $&  \\
+\nf{MIN}{MAX}               &\tb{\nf{0.3\%}{38.1\%}}   &\nf{0.5\%}{19.4\%}          &\tb{\nf{0.2\%}{29.1\%}}     &\tb{\nf{0.3\%}{45.1\%}} &\tb{\nf{0.3\%}{90.0\%}}   &$-                          $&\tb{\nf{0.3\%}{34.4\%}}      &  \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+  \small
+  \item[*] DBI越小，或DI和SI越大，表示分类效果越好。最优的项目表中加粗标注。
+  \item[*] 有单样例类别（$MIN=0.03\%$）的聚类没有意义，但评估指标会很好。表中用括号标注。
+  \item[*] DBSCAN算法在各种参数下都仅能得到一部分数据为噪声，其他全为一类的聚类结果，故未列出。
+  \item[a] K-medians在算法中使用曼哈顿距离。为合理评估，指标计算中也使用曼哈顿距离。
+  \item[b] Mean-Shift不接收类别数作为参数，但可以设置带宽参数得到不同的类别数的聚类。
+  \item[c] Affinity Propagation算法可以自行确定类别数。实验中，给出的方案类别数为11。
+\end{tablenotes}
+\end{threeparttable}

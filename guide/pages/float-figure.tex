@@ -1,0 +1,87 @@
+% !TEX root = ../guide.tex
+% float-figure.tex
+%
+% Copyright 2016 Zheng Xie <xie.zheng777@gmail.com>
+% https://github.com/Tedxz/xjtuthesis-x
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Zheng Xie.
+%
+% xjtuthesis-x is a Derived Work of xjtuthesis. The original maintainer of
+% xjtuthesis is Weisi Dai (multiple1902 <multiple1902@gmail.com>),
+% who published the project on https://code.google.com/p/xjtuthesis/ (no
+% longer accessable). Currently, xjtuthesis is maintained by Aetf, and can
+% be accessed on https://github.com/Aetf/xjtuthesis.
+%
+% xjtuthesis-x includes bug fixes, new features and a user guide.
+% For detail, please refer to Readme.md.
+%
+% If you want to contribute to xjtuthesis-x or become the maintainer of
+% xjtuthesis-x, please feel free to contact me.
+
+\section{图片的插入}
+
+一个简单的图片插入的代码如图~\ref{fig:fig_code}所示。若要引用该图片，在正文中插入第一行的内容即可。``图''字后面的波浪线产生一个不可间断空格，使得在编译时不会在该处换行，后通过\texttt{ref}命令引用图片标号，得到类似``图~1-3''的效果。代码中，\texttt{figure}环境创建了一个浮动的块，在该块中\texttt{includegraphics}命令插入了具体的图片\footnote{事实上，\texttt{figure}环境中并不一定要插入图片，如图~\ref{fig:fig_code}，里面实际上是文本。}。
+所有的图片放在\texttt{figures/}目录下，这是通过在最上层的\texttt{tex}中，\texttt{\\graphicspath\string{\string{figures/\string}\string}}这行代码设定的。参数\texttt{h}表示图片尽量防止在代码的位置，如果放不下的话可以浮动\footnote{参数设置参见\url{https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}。}。
+
+\begin{figure}[h]
+  {
+  \setstretch{1.2}%
+  \fontsize{10pt}{12pt}\selectfont
+  \setmainfont{Courier New}
+  \begin{lstlisting}[showstringspaces=false,numbers=left,xleftmargin=3em]
+图~\ref{fig:figlabel}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.5\textwidth]{picture.eps}
+  \caption{图注内容}
+  \label{fig:figlabel}
+\end{figure}
+
+  \end{lstlisting}
+  }
+\caption{图片插入代码样例}
+\label{fig:fig_code}
+\end{figure}
+
+\texttt{xjtuthesis-x}中使用\texttt{subfig}包实现子图。如果要插入包含多个子图的图片，并对每一个子图进行标注，可以参考图~\ref{fig:fig_demo_subfig}的代码。
+
+\begin{figure}[h]
+  {
+  \setstretch{1.2}%
+  \fontsize{10pt}{12pt}\selectfont
+  \setmainfont{Courier New}
+  \begin{lstlisting}[showstringspaces=false,numbers=left,xleftmargin=3em]
+\begin{figure}[h]
+  \centering
+  \subfloat[][第一个图的图注]{
+    \includegraphics[width=0.32\textwidth]{fig1_1}
+  }
+  \subfloat[][第二个图的图注]{
+    \includegraphics[width=0.32\textwidth]{fig1_2}
+  }
+  \subfloat[][第三个图的图注]{
+    \includegraphics[width=0.32\textwidth]{fig1_3}
+  }
+  \caption{总体的图注}
+  \label{fig:subfig}
+\end{figure}
+
+
+  \end{lstlisting}
+  }
+\caption{子图插入代码样例}
+\label{fig:fig_demo_subfig}
+\end{figure}
+
+值得一提的是，\LaTeX 中默认使用的是eps格式的矢量图。模板中使用的\texttt{graphicx}包使得文中可以插入jpg等格式的图片。在论文中使用矢量图可以使得论文图片看起来更清晰，因此强烈建议大家使用矢量图。Matlab等许多软件可以生成eps格式的矢量图；也可以用Adobe Illustrator绘制矢量图。

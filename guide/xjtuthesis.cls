@@ -89,6 +89,12 @@
 \RequirePackage{algorithm}
 \RequirePackage{algpseudocode}
 
+\RequirePackage{bm} % use \bm for vectors is better than \mathbf
+\RequirePackage{graphicx}
+\RequirePackage{listings}
+\RequirePackage{multirow}
+\RequirePackage{nicefrac}
+
 % CJK character support
 \RequirePackage[no-math]{fontspec}
 \RequirePackage{xltxtra,xunicode}
@@ -394,6 +400,7 @@
 }
 
 % algorithm/pseudocode
+\newcommand{\algomidrule}{\vskip 4pt \hrule height 1pt \vskip 4pt}
 \renewcommand\thealgorithm{%
     \ifnum \c@chapter >\z@ \thechapter-\fi \@arabic \c@algorithm%
 }
@@ -972,3 +979,6 @@
 \titlecontents{chapter}[0em]{}{\thecontentslabel\quad}{}{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
 \titlecontents{section}[1em]{}{\thecontentslabel\quad}{}{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
 \titlecontents{subsection}[2em]{}{\thecontentslabel\quad}{}{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
+
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}

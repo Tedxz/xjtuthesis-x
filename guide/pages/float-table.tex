@@ -1,0 +1,138 @@
+% !TEX root = ../guide.tex
+% float-table.tex
+%
+% Copyright 2016 Zheng Xie <xie.zheng777@gmail.com>
+% https://github.com/Tedxz/xjtuthesis-x
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Zheng Xie.
+%
+% xjtuthesis-x is a Derived Work of xjtuthesis. The original maintainer of
+% xjtuthesis is Weisi Dai (multiple1902 <multiple1902@gmail.com>),
+% who published the project on https://code.google.com/p/xjtuthesis/ (no
+% longer accessable). Currently, xjtuthesis is maintained by Aetf, and can
+% be accessed on https://github.com/Aetf/xjtuthesis.
+%
+% xjtuthesis-x includes bug fixes, new features and a user guide.
+% For detail, please refer to Readme.md.
+%
+% If you want to contribute to xjtuthesis-x or become the maintainer of
+% xjtuthesis-x, please feel free to contact me.
+
+\section{表格的插入}
+按照《工作手册》，论文中的表格应为通栏的三线表。表格以``\&''字符分割列，以双反斜杠换行，具体不再赘述。模板中加入了\texttt{tabularx}包提供了\texttt{tabularx}环境，也可以使用基础的\texttt{tabular}环境进行表格的绘制。
+图~\ref{fig:table1}和表~\ref{tab:table1}是一个简单表格的示例。图~\ref{fig:multirow}示意了合并单元格和跨列辅助线的绘制方法，此处不再给出效果展示。
+
+
+\begin{figure}[h]
+  {
+  \setstretch{1.2}%
+  \fontsize{10pt}{12pt}\selectfont
+  \setmainfont{Courier New}
+  \begin{lstlisting}[showstringspaces=false,numbers=left,xleftmargin=3em]
+\begin{table}[h!]
+  \centering
+  \caption{表格样例} \label{tab:simple}
+  \begin{tabularx}{\textwidth}{XXXX}
+  \toprule
+        & 牛奶 & 鸡蛋 & 苹果 \\
+  \midrule
+   周一 &    1 &    4 &    7 \\
+   周二 &    2 &    5 &    8 \\
+   周三 &    3 &    6 &    9 \\
+   \bottomrule
+  \end{tabularx}
+\end{table}
+
+% 两列居中则参数如下设置
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X
+>{\centering\arraybackslash}X}
+% ...
+  \end{lstlisting}
+  }
+\caption{表格插入代码样例}
+\label{fig:table1}
+\end{figure}
+
+\begin{table}[h!]
+  \centering
+  \caption{表格样例}
+  \label{tab:table1}
+  \begin{tabularx}{\textwidth}{XXXX}
+  \toprule
+        & 牛奶 & 鸡蛋 & 苹果 \\
+  \midrule
+   周一 &    1 &    4 &    7 \\
+   周二 &    2 &    5 &    8 \\
+   周三 &    3 &    6 &    9 \\
+   \bottomrule
+  \end{tabularx}
+\end{table}
+
+
+\begin{figure}[h]
+  {
+  \setstretch{1.2}%
+  \fontsize{10pt}{12pt}\selectfont
+  \setmainfont{Courier New}
+  \begin{lstlisting}[showstringspaces=false,numbers=left,xleftmargin=3em]
+% 以下面这一行代码作为单元格的内容会使得该单元格跨越三列并居中。
+\multicolumn{3}{c}{内容}
+% 在表格一行的开头加入下面的代码可以绘制从第三列到第四列的辅助横线。
+\cmidrule{3-4}
+  \end{lstlisting}
+  }
+\caption{跨列单元格与辅助线}
+\label{fig:multirow}
+\end{figure}
+
+\LaTeX 的表格绘制相比MS Word要麻烦许多。具体实践中，可以在MS Excel中绘制好表格粘贴到一些在线\LaTeX 表格生成工具\footnote{如\url{http://www.tablesgenerator.com/}。}中去得到代码，再加以调整以适应本模板。
+
+如何设计简洁美观的表格并不是一个简单的问题，对论文美观有更高要求的同学可以自行查阅相关资料\footnote{\url{http://www.inf.ethz.ch/personal/markusp/teaching/guides/guide-tables.pdf}是一个表格的设计参考。}。表~\ref{tab:algo_compare}是笔者毕业论文中的一个表格，可以作为设计参考。由于表格较大，可以使用\texttt{hp}参数令其放置在单独的页面上。表注功能由模板中包含的\texttt{threeparttable}包实现，用法可以参照图~\ref{fig:tpt}，或在本文的源文件中参考表~\ref{tab:algo_compare}的相应代码。
+
+\begin{figure}[h]
+  {
+  \setstretch{1.2}%
+  \fontsize{10pt}{12pt}\selectfont
+  \setmainfont{Courier New}
+  \begin{lstlisting}[showstringspaces=false,numbers=left,xleftmargin=3em]
+\begin{table}[hp]
+\centering\caption{表格题注}
+\label{tab:foo}
+
+\begin{threeparttable}
+% tabular或tabularx环境的选择依个人而定。
+\begin{tabular}{rcccccccl}
+% 表格内容省略
+% 使用\tnote{a}插入第一个注释，依此类推。
+\end{tabular}
+\begin{tablenotes}
+  \small
+  \item[*] 针对表格的注释内容；
+  \item[a] a处的注释内容；
+  \item[b] b处的注释内容。
+\end{tablenotes}
+\end{threeparttable}
+
+\end{table}
+  \end{lstlisting}
+  }
+\caption{使用\texttt{threeparttable}插入表注}
+\label{fig:tpt}
+\end{figure}
+
+\begin{table}[hp]
+\centering
+\caption{聚类算法在本文数据上的性能比较}
+\label{tab:algo_compare}
+\input{tables/algo_compare.tex}
+\end{table}
