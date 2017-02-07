@@ -8,6 +8,8 @@ This is an XJTU thesis LaTeX template forked from [`xjtuthesis`](https://github.
 
 `xjtuthesis-x` also provides a [user guide](guide.pdf) of this project, including usage introduction of new features, as well as some advices about thesis writing according to my experience. Furthermore, you may also refer to the examples in `xjtuthesis` project to get started.
 
+Both [`xjtuthesis`](https://github.com/Aetf/xjtuthesis) and `xjtuthesis-x` are designed according to the XJTU's official thesis template or manual. If you find that `xjtuthesis` breaks the specifications in the official manual, please open an issue (or contribute to fixing the bug). The newest version of the XJTU's official thesis manual (2017) can be found [here](http://pts.xjtu.edu.cn:8080/shownews.aspx?newsno=gEwvWdvAqO59MhsUwS4zZw....).
+
 ####Changelog
 ###### 2016-08-27
 1. Completed the user guide.
