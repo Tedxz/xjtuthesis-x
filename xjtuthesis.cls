@@ -71,7 +71,7 @@
 
 % Math & format packages
 % \RequirePackage{showframe}
-\RequirePackage[fleqn]{amsmath}
+\RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{indentfirst}
 \RequirePackage{tabularx}
