@@ -29,6 +29,7 @@
 % merge xjtuthesis-x
 % auto detect font
 % pandoc code support
+% bachelor title
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{xjtuthesis}
@@ -59,6 +60,7 @@
 \DeclareOption{bigskip}     {\xjtu@bigskiptrue} % bachelor only
 \DeclareOption{nofont}      {\xjtu@nofonttrue}
 \DeclareOption{propfont}    {\xjtu@propfonttrue}
+\DeclareOption{truefont}    {\xjtu@propfonttrue}
 \DeclareOption{pdflinks}    {\xjtu@pdflinkstrue}
 \DeclareOption{colorlinks}  {\xjtu@colorlinkstrue}
 \DeclareOption{compact}     {\xjtu@compacttrue}
@@ -1072,7 +1074,7 @@
   \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
   \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
   % Add ',fontsize=\small' for more characters per line
-  \newenvironment{Shaded}{}{}
+  \newenvironment{Shaded}{\begin{spacing}{0.7}}{\end{spacing}}
   \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
   \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
   \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
