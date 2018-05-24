@@ -1,10 +1,15 @@
+% bachelor.tex
+%
+% Aetf <aetf@unlimitedcodeworks.xyz>
+% Copyright 2016 Aetf <aetf@unlimitedcodeworks.xyz>
+%
 % multiple1902 <multiple1902@gmail.com>
-% xjtuthesis.cls
-% Copyright 2011~2013, multiple1902 (Weisi Dai)
-% https://code.google.com/p/xjtuthesis/
+% Copyright 2011~2012, multiple1902 (Weisi Dai)
+%
+% Project Home: https://github.com/Aetf/xjtuthesis
 %
 % It is strongly recommended that you read documentations located at
-%   http://code.google.com/p/xjtuthesis/wiki/Landing?tm=6
+%   https://github.com/Aetf/xjtuthesis/wiki
 % in advance of your compilation if you have not read them before.
 %
 % This work may be distributed and/or modified under the
@@ -17,15 +22,21 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainer of this work is Weisi Dai.
+% The Current Maintainer of this work is WindProphet.
 %
+
+%% WindProphet Changelog: 2018/5/24
+% merge xjtuthesis-x
+% auto detect font
+% pandoc code support
+
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{xjtuthesis}
-[2011/7/15 0.0.1 Xi'an Jiaotong University Dissertation Template]
+[2018/5/24 0.8.0 Xi'an Jiaotong University Dissertation Template]
 
 % Brand marks, and version info
 \def\xjtuthesis{XJTUthesis}
-\def\meta@version{0.6.6}
+\def\meta@version{0.8.0}
 \def\meta@codename{Monet}
 \def\metaversion{\meta@version}
 
@@ -34,22 +45,24 @@
 \newif\ifxjtu@master    \xjtu@masterfalse
 \newif\ifxjtu@doctor    \xjtu@doctorfalse
 \newif\ifxjtu@bigskip   \xjtu@bigskipfalse
-\newif\ifxjtu@truefont  \xjtu@truefontfalse
 \newif\ifxjtu@nofont    \xjtu@nofontfalse
+\newif\ifxjtu@propfont  \xjtu@propfontfalse
 \newif\ifxjtu@pdflinks  \xjtu@pdflinksfalse
 \newif\ifxjtu@colorlinks\xjtu@colorlinksfalse
 \newif\ifxjtu@compact   \xjtu@compactfalse
 \newif\ifxjtu@content	  \xjtu@contentfalse
+\newif\ifxjtu@pandoc    \xjtu@pandocfalse
 
 \DeclareOption{bachelor}    {\xjtu@bachelortrue}
 \DeclareOption{master}      {\xjtu@mastertrue}
 \DeclareOption{doctor}      {\xjtu@doctortrue}
 \DeclareOption{bigskip}     {\xjtu@bigskiptrue} % bachelor only
-\DeclareOption{truefont}    {\xjtu@truefonttrue}
 \DeclareOption{nofont}      {\xjtu@nofonttrue}
+\DeclareOption{propfont}    {\xjtu@propfonttrue}
 \DeclareOption{pdflinks}    {\xjtu@pdflinkstrue}
 \DeclareOption{colorlinks}  {\xjtu@colorlinkstrue}
 \DeclareOption{compact}     {\xjtu@compacttrue}
+\DeclareOption{pandoc}      {\xjtu@pandoctrue}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 
@@ -70,7 +83,6 @@
 \fi
 
 % Math & format packages
-% \RequirePackage{showframe}
 \RequirePackage[fleqn]{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{indentfirst}
@@ -105,6 +117,10 @@
 
 % titleformat
 \RequirePackage{titlesec,titletoc}
+
+%% WindProphet Comment: auto platform
+% auto detect platform
+\RequirePackage{ifplatform}
 
 % l10n here
 \renewcommand{\ALG@name}{算法}
@@ -188,7 +204,8 @@
 \thu@define@fontsize{qihao}{5.5bp}
 \thu@define@fontsize{bahao}{5bp}
 \renewcommand\normalsize{%
-   \@setfontsize\normalsize{12bp}{20bp}%
+  %下面这一行必须以百分号结尾，否则header会有一个向右的微小偏移。
+  \@setfontsize\normalsize{12bp}{20bp}%
   \abovedisplayskip=10bp \@plus 2bp \@minus 2bp
   \abovedisplayshortskip=10bp \@plus 2bp \@minus 2bp
   \belowdisplayskip=\abovedisplayskip
@@ -215,23 +232,43 @@
   \def\@oddfoot{\hfil\wuhao\thepage\hfil}%
   \let\@evenfoot=\@oddfoot}
 
+% TODO: WindProphet auto font using system
 % Font-family
 \ifxjtu@nofont\else
-    \ifxjtu@truefont
+  \ifxjtu@propfont
+    \setmainfont[Ligatures=TeX]{Times New Roman}
+    \setCJKmainfont{SimSun}
+    \setCJKfamilyfont{vert}[RawFeature={script=hani:language=CHN:vertical:+valt}]{SimSun}
+        \def\CJKmovesymbol#1{\raise.35em\hbox{#1}}
+        \def\CJKmove{\let\CJKsymbol\CJKmovesymbol \let\CJKpunctsymbol\CJKsymbol}
+    \setCJKfamilyfont{hei}{SimHei}
+  \else
+    %% WindProphet Comment: auto platform
+    % default detect platform and auto load font
+    \ifwindows
       \setmainfont[Ligatures=TeX]{Times New Roman}
       \setCJKmainfont{SimSun}
       \setCJKfamilyfont{vert}[RawFeature={script=hani:language=CHN:vertical:+valt}]{SimSun}
-          \def\CJKmovesymbol#1{\raise.35em\hbox{#1}}
-          \def\CJKmove{\let\CJKsymbol\CJKmovesymbol \let\CJKpunctsymbol\CJKsymbol}
+        \def\CJKmovesymbol#1{\raise.35em\hbox{#1}}
+        \def\CJKmove{\let\CJKsymbol\CJKmovesymbol \let\CJKpunctsymbol\CJKsymbol}
       \setCJKfamilyfont{hei}{SimHei}
+    \else\ifmacosx
+      % auto detect macos can only use in `-shell-escape' mode, it will be a little dangerous
+      \setmainfont[Ligatures=TeX]{Times New Roman}
+      \setCJKmainfont{Songti SC}
+      \setCJKfamilyfont{vert}[RawFeature={script=hani:language=CHN:vertical:+valt}]{Songti SC}
+        \def\CJKmovesymbol#1{\raise.35em\hbox{#1}}
+        \def\CJKmove{\let\CJKsymbol\CJKmovesymbol \let\CJKpunctsymbol\CJKsymbol}
+      \setCJKfamilyfont{hei}{Heiti SC}
     \else
       \setmainfont[Ligatures=TeX]{FreeSerif}
-      \setCJKmainfont{文鼎ＰＬ简报宋}
-      \setCJKfamilyfont{vert}[RawFeature={script=hani:language=CHN:vertical:+valt}]{文鼎ＰＬ简报宋}
-          \def\CJKmovesymbol#1{\raise.35em\hbox{#1}}
-          \def\CJKmove{\let\CJKsymbol\CJKmovesymbol \let\CJKpunctsymbol\CJKsymbol}
+      \setCJKmainfont{AR PL UMing CN}
+      \setCJKfamilyfont{vert}[RawFeature={script=hani:language=CHN:vertical:+valt}]{AR PL UMing CN}
+        \def\CJKmovesymbol#1{\raise.35em\hbox{#1}}
+        \def\CJKmove{\let\CJKsymbol\CJKmovesymbol \let\CJKpunctsymbol\CJKsymbol}
       \setCJKfamilyfont{hei}{SimHei}
-    \fi
+    \fi\fi
+  \fi
 \fi
 
 \def\thu@define@term#1{
@@ -271,10 +308,8 @@
     \node[shape=circle,draw,inner sep=0.5pt,minimum size=8pt] (char) {#1};
 }
 \renewcommand\thefootnote{\protect\circled{\arabic{footnote}}}
-\setlength{\footnotesep}{\baselineskip}
 \renewcommand\@makefntext[1]{
-    \setstretch{1.2}%
-    \noindent\@thefnmark #1
+    \noindent\makebox[0pt][r]{\@thefnmark}#1
 }
 
 \thu@define@term{type}
@@ -343,11 +378,21 @@
 \thu@define@term{stunum}
 \thu@define@term{degreetype}
 
+\thu@define@term{college}
+\thu@define@term{academy}
+\thu@define@term{theclassname}
+\thu@define@term{designunit}
+
+\designunit{西安交通大学}
+
+\newcommand\classdetail[3]{\college{#1}\academy{#2}\theclassname{#3}}
+
 \newcommand\xjtutype{\xjtu@type}
 
 % Geometry specifications
 % raggedbottom 令latex倾向于在页低添加空白，而不是拉伸段间距或列表前后间距、公式图片前后间距。按照工作手册，要求段间不空行。
 % \parskip 0pt 也可以实现段间不空行，但是在无法填充页面时会导致列表前后、图片前后等位置被拉伸。
+%% WindProphet Comment: use xjtu-x thistime
 \raggedbottom
 \topmargin=-1in % 消除页眉-边界距离初始值
 \headheight=5.5mm % 该设定使得效果与官方doc模板相似
@@ -387,12 +432,11 @@
 
 \let\oldtable=\table
 \renewcommand\table[1][]{
-    \vskip0.5\baselineskip
     \oldtable[#1]
     \wuhao
-    \renewcommand{\arraystretch}{1.5}
 }
 
+%% WindProphet Comment: use xjtu-x thistime
 % algorithm/pseudocode
 \renewcommand\thealgorithm{%
     \ifnum \c@chapter >\z@ \thechapter-\fi \@arabic \c@algorithm%
@@ -517,6 +561,7 @@
 
 \ifxjtu@bachelor
 
+    %% WindProphet Comment: use xjtu-x thistime
     % LaTeX and MS word calculate line space differently.
     % Experiments shown that using \linespread{1.175} and \linespread{0.94}
     % will give the same result of using 1.5 and 1.2 line spacing, respectively.
@@ -545,6 +590,45 @@
     \pagestyle{plain}
 
     \type{本科}
+    \renewcommand\xjtuchead{
+      \thispagestyle{empty}
+      \pagenumbering{gobble}
+      \begin{center}
+      \vspace*{-1.2cm}
+        \includegraphics[width=7.6cm]{XJTUred.pdf} \\
+        \vskip 0.9cm
+        {\bf \xiaochu \color{red} 毕业设计（论文）}
+
+        \vskip 2.5cm
+        \vbox to 4cm {
+          % 无法处理多行题目
+          \parbox{2cm}{\bf \sanhao 题\;\;\;目}
+          {\parbox{13cm}{\centering \bf \sanhao {\xjtu@ctitle}\kern1pt\hrule\kern3pt}}
+        }
+        {\bf \sanhao
+          % 空值时线的位置不正确
+          \parbox{5cm}{\centering\raisebox{0pt}[15pt][0pt]{}\xjtu@college\hrule} \parbox{2cm}{\centering 学院}
+          \parbox{2.5cm}{\centering\raisebox{0pt}[15pt][0pt]{}\xjtu@academy\hrule} \parbox{3cm}{\centering 系（专业）}
+          \parbox{1.5cm}{\centering\raisebox{0pt}[15pt][0pt]{}\xjtu@theclassname\hrule} \parbox{1cm}{\centering 班}
+        }
+    \begin{spacing}{2}\sanhao\bf
+      % 空值时线的位置不正确
+      \parbox{3cm}{学生姓名} \parbox{12cm}{\centering\raisebox{0pt}[15pt][0pt]{}\xjtu@cauthor\hrule} \\
+      \parbox{3cm}{学 \quad \;\; 号} \parbox{12cm}{\centering\raisebox{0pt}[15pt][0pt]{}\xjtu@stunum\hrule} \\
+      \parbox{3cm}{指导教师} \parbox{12cm}{\centering\raisebox{0pt}[15pt][0pt]{}\xjtu@csupervisor\hrule} \\
+      \parbox{4cm}{设计所在单位} \parbox{11cm}{\centering\raisebox{0pt}[15pt][0pt]{}\xjtu@designunit\hrule} \\
+        \xjtu@cproddate
+      \end{spacing}
+      \end{center}
+      \ifxjtu@compact\else
+          \clearpage
+          \phantom{x}
+          \thispagestyle{empty}
+      \fi
+      \clearpage
+      \setcounter{page}{1}
+      \pagenumbering{Roman}
+    }
     \renewcommand\xjtucinfopage{
         \chaptermark{摘\quad 要}
         \noindent {\bf
@@ -563,7 +647,7 @@
         \mbox{}
 
         {\wuhao \noindent
-            {\bf 关键词}：
+            {\bf 关\:\;键\:\;词}：
         \xjtu@ckeywords}
         \clearpage
     }
@@ -675,6 +759,7 @@
 
     \renewcommand\xjtucover{
         \thispagestyle{empty}
+        \pagenumbering{gobble}
         \setlength\hoffset{0.8cm}
         \hspace*{-3.8cm}
         \rotatebox{-90}{
@@ -719,10 +804,13 @@
         \fi
         \clearpage
         \setlength\hoffset{0cm}
+        \setcounter{page}{1}
+        \pagenumbering{Roman}
     }
 
     \renewcommand\xjtuchead{
         \thispagestyle{empty}
+        \pagenumbering{gobble}
         \begin{center}
         \vspace*{1.5cm}
             \includegraphics[width=8cm]{XJTU.pdf} \\
@@ -747,10 +835,13 @@
             \thispagestyle{empty}
         \fi
         \clearpage
+        \setcounter{page}{1}
+        \pagenumbering{Roman}
     }
 
     \renewcommand\xjtuehead{
         \thispagestyle{empty}
+        \pagenumbering{gobble}
         \begin{center}
         \vspace*{1.5cm}
             {\bf \sanhao \xjtu@etitle}
@@ -777,7 +868,8 @@
             \thispagestyle{empty}
         \fi
         \clearpage
-
+        \setcounter{page}{1}
+        \pagenumbering{Roman}
     }
 
     \renewcommand\xjtucinfopage{
@@ -972,3 +1064,47 @@
 \titlecontents{chapter}[0em]{}{\thecontentslabel\quad}{}{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
 \titlecontents{section}[1em]{}{\thecontentslabel\quad}{}{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
 \titlecontents{subsection}[2em]{}{\thecontentslabel\quad}{}{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
+
+\ifxjtu@pandoc
+  \RequirePackage{color}
+  \RequirePackage{fancyvrb}
+  \newcommand{\VerbBar}{|}
+  \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+  % Add ',fontsize=\small' for more characters per line
+  \newenvironment{Shaded}{}{}
+  \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+  \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+  \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+  \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+  \newcommand{\BuiltInTok}[1]{#1}
+  \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+  \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+  \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+  \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+  \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+  \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+  \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+  \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+  \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+  \newcommand{\ExtensionTok}[1]{#1}
+  \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+  \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+  \newcommand{\ImportTok}[1]{#1}
+  \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+  \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+  \newcommand{\NormalTok}[1]{#1}
+  \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+  \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+  \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+  \newcommand{\RegionMarkerTok}[1]{#1}
+  \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+  \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+  \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+  \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+  \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+  \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+  \setlength{\emergencystretch}{3em}  % prevent overfull lines
+  \providecommand{\tightlist}{%
+    \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\fi
