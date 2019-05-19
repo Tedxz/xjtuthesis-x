@@ -625,8 +625,8 @@
     \renewcommand\xjtuendcontent{
         \newpage
         \titleformat{\chapter}[block]{\sanhao}{}{0em}{\begin{center}}[\end{center}]
-        \titleformat{\section}[hang]{\xiaosan}{}{0em}{\thesection\quad }[\vskip -0.5em]
-        \titleformat{\subsection}{\sihao}{}{0em}{\vskip -1.5em \thesubsection\quad{}}
+        \titleformat{\section}[hang]{\xiaosan}{}{0em}{\thesection\quad}[]
+        \titleformat{\subsection}{\sihao}{}{0em}{\thesubsection\quad{}}
         \titleformat{\subsubsection}{}{}{0em}{\thesubsubsection\quad}[]
         \titlecontents{chapter}[0em]{}{\thecontentslabel\quad}{}{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
         \titlecontents{section}[1.5em]{}{\thecontentslabel\quad}{}{\dotfill\contentspage[{\makebox[0pt][r]{\thecontentspage}}]}
